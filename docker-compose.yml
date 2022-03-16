@@ -1,0 +1,25 @@
+version: '2'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - 8080:80
+        volumes:
+            - ./docker/nginx:/etc/nginx/conf.d
+            - .:/var/www
+        links:
+            - php
+    php:
+        build: ./docker/php
+        links:
+            - postgresql
+        volumes:
+            - .:/var/www
+    postgresql:
+        image: postgres:11
+        ports:
+            - 5433:5432
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: yii2basic
