@@ -39,7 +39,7 @@ final class VideoRepository implements VideoRepositoryInterface
     public function getCount(): int
     {
         $command = $this->connection->createCommand(
-            'SELECT COUNT(uuid) FROM video',
+            'SELECT COUNT(*) FROM video',
         );
 
         return $command->queryOne()['count'] ?? 0;

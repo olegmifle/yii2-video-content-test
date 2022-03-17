@@ -4,7 +4,7 @@
  * @var yii\web\View $this
  * @var \yii\data\Pagination $pagination
  * @var \yii\data\Sort $sort
- * @var array $chancedVideos
+ * @var \app\entity\Video[] $videos
  */
 
 use app\widgets\Paginator;
@@ -19,8 +19,8 @@ $this->title = 'Video hosting test task';
     <?= Sorter::widget(['sort' => $sort])?>
 
     <div class="row">
-        <?php foreach ($chancedVideos as $videos) { ?>
-            <?php foreach ($videos as $video) { ?>
+        <?php foreach (array_chunk($videos, 4) as $chunkedVideos) { ?>
+            <?php foreach ($chunkedVideos as $video) { ?>
                 <?= VideoItem::widget(['video' => $video]) ?>
             <?php } ?>
 

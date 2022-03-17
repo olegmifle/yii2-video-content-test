@@ -24,12 +24,7 @@ final class VideoService
 
         $result = [];
         foreach ($sortedVideos as $video) {
-            $result[] = $this->videoFactory->create(
-                $video['title'],
-                (int) $video['duration'],
-                (int) $video['views'],
-                $video['created_at']
-            );
+            $result[] = $this->videoFactory->createFromArray($video);
         }
 
         return $result;

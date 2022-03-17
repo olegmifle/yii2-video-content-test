@@ -55,7 +55,7 @@ final class SiteController extends Controller
         );
 
         return $this->render('index', [
-            'chancedVideos' => array_chunk($videos, 4),
+            'videos' => $videos,
             'pagination' => $pagination,
             'sort' => $sort,
         ]);

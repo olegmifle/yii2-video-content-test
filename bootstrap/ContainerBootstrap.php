@@ -14,12 +14,9 @@ final class ContainerBootstrap implements BootstrapInterface
     public function bootstrap($app): void
     {
         $container = Yii::$container;
-
-        $container->setDefinitions([
-            VideoRepositoryInterface::class => function () {
-                $connection = Yii::$app->getDb();
-                return new VideoRepository($connection);
-            },
-        ]);
+        $container->setSingleton(
+            VideoRepositoryInterface::class,
+            static fn() => new VideoRepository(Yii::$app->getDb())
+        );
     }
 }

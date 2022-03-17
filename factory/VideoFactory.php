@@ -8,8 +8,12 @@ use app\entity\Video;
 
 final class VideoFactory
 {
-    public function create(string $title, int $duration, int $views, string $createdAt): Video
+    public function createFromArray(array $video): Video
     {
-        return new Video($title, $duration, $views, $createdAt);
+        return new Video($video['title'],
+            (int) $video['duration'],
+            (int) $video['views'],
+            $video['created_at']
+        );
     }
 }
