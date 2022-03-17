@@ -1,12 +1,5 @@
 FROM php:7.4-fpm
 
-RUN apk add --no-cache \
-    # for intl extension
-    icu-dev \
-    # for postgres
-    postgresql-dev
-
-
 RUN apt-get update && apt-get install -y \
         curl \
         wget \

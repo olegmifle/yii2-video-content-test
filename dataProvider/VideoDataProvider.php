@@ -56,11 +56,11 @@ final class VideoDataProvider extends ActiveDataProvider
                 ->offset($pagination->getOffset())
             ;
 
-            $query->innerJoin(['videoWithLimit' => $subQuery], '"videoWithLimit".uuid = "video".uuid');
-        }
+            if (($sort = $this->getSort()) !== false) {
+                $subQuery->addOrderBy($sort->getOrders());
+            }
 
-        if (($sort = $this->getSort()) !== false) {
-            $query->addOrderBy($sort->getOrders());
+            $query->innerJoin(['videoWithLimit' => $subQuery], '"videoWithLimit".uuid = "video".uuid');
         }
 
         return $query->all($this->db);
