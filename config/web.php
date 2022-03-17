@@ -1,5 +1,6 @@
 <?php
 
+use app\bootstrap\ContainerBootstrap;
 use app\formatter\VideoFormatter;
 use yii\caching\FileCache;
 use yii\log\FileTarget;
@@ -10,7 +11,10 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'video-hosting',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        ContainerBootstrap::class
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

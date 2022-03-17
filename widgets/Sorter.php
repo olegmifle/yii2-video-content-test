@@ -48,5 +48,4 @@ final class Sorter extends Widget
             ],
         ]);
     }
-
 }

@@ -2,31 +2,32 @@
 
 /**
  * @var yii\web\View $this
- * @var ActiveDataProvider $dataProvider
+ * @var \yii\data\Pagination $pagination
+ * @var \yii\data\Sort $sort
+ * @var array $chancedVideos
  */
 
 use app\widgets\Paginator;
 use app\widgets\Sorter;
 use app\widgets\VideoItem;
-use yii\data\ActiveDataProvider;
-use yii\widgets\ListView;
 
 $this->title = 'Video hosting test task';
 ?>
 <div class="site-index">
     <h1>Videos Hosing</h1>
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'layout' => '{sorter}<div class="row">{items}</div>{pager}',
-        'itemOptions' => [
-            'tag' => false,
-        ],
-        'itemView' => static fn($model, $key, $index) => VideoItem::widget(['video' => $model, 'index' => $index]),
-        'sorter' => [
-            'class' => Sorter::class,
-        ],
-        'pager' => [
-            'class' => Paginator::class,
-        ]
-    ]) ?>
+
+    <?= Sorter::widget(['sort' => $sort])?>
+
+    <div class="row">
+        <?php foreach ($chancedVideos as $videos) { ?>
+            <?php foreach ($videos as $video) { ?>
+                <?= VideoItem::widget(['video' => $video]) ?>
+            <?php } ?>
+
+            <div class="w-100"></div>
+
+        <?php } ?>
+    </div>
+
+    <?= Paginator::widget(['pagination' => $pagination])?>
 </div>
